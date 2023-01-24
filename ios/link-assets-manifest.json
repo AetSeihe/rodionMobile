@@ -1,0 +1,25 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Circe-Bold.ttf",
+      "sha1": "dc9ec86a8a2b4d53aa4e09283c8827af7eba7a21"
+    },
+    {
+      "path": "assets/fonts/Circe-ExtraBold.ttf",
+      "sha1": "72fcbef1cc97e97acf01fe673f29e279cf7b8ac2"
+    },
+    {
+      "path": "assets/fonts/Circe-Light.ttf",
+      "sha1": "be137269aabc62bf069698f73158886c8b9b4ffd"
+    },
+    {
+      "path": "assets/fonts/Circe-Regular.ttf",
+      "sha1": "c29d2fcd18d930e4041b934a9bffa13ca0c7eb6d"
+    },
+    {
+      "path": "assets/fonts/Circe-Thin.ttf",
+      "sha1": "4f31abbacf6084e0e5a627f5f7f18e34189fabd5"
+    }
+  ]
+}
