@@ -1,5 +1,6 @@
 export const colorTheme = {
   main: '#FF971D',
+  main2: '#fff1e0',
   sub: '#979797',
   text: '#292929',
   text2: '#585858',

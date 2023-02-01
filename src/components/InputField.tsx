@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   ImageSourcePropType,
@@ -7,9 +7,9 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import MaskInput, {MaskInputProps} from 'react-native-mask-input';
-import Animated, {FadeIn, FadeOut, Layout} from 'react-native-reanimated';
-import {colorTheme, mainFont} from '../theme/theme';
+import MaskInput, { MaskInputProps } from 'react-native-mask-input';
+import Animated, { FadeIn, FadeOut, Layout } from 'react-native-reanimated';
+import { colorTheme, mainFont } from '../theme/theme';
 
 type Props = {
   label?: string;
@@ -49,6 +49,7 @@ const InputField = ({
           cursorColor={colorTheme.main}
           secureTextEntry={visibleField}
           {...props}
+          placeholderTextColor={'gray'}
           caretHidden={false}
         />
         {secret && (
@@ -77,7 +78,6 @@ const styles = StyleSheet.create({
   labelWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: -5,
   },
   label: {
     fontFamily: mainFont.bold,

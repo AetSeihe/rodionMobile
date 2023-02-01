@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_URL = 'https://d2c7-93-177-174-71.eu.ngrok.io';
+export const BASE_URL = 'https://68d8-93-177-174-71.eu.ngrok.io';
 
 const axiosConfig = {
   Authorization: '',
@@ -18,5 +18,5 @@ const instance = axios.create({
   baseURL: BASE_URL,
 });
 
-export const apiSettings = {setAuthorizationInHeader, getApiHeader};
+export const apiSettings = { setAuthorizationInHeader, getApiHeader };
 export default instance;

@@ -1,10 +1,10 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {Image, StyleSheet} from 'react-native';
-import {TABBAR_HEIGHT} from '../constants/app';
+import { Image, StyleSheet } from 'react-native';
+import { TABBAR_HEIGHT } from '../constants/app';
 import HomeScreen from '../screens/MainScreen/HomeScreen';
-import {colorTheme} from '../theme/theme';
-import {SCREEN_NAMES} from '../types/screen-names.type';
+import { colorTheme } from '../theme/theme';
+import { SCREEN_NAMES } from '../types/screen-names.type';
 
 const Tab = createBottomTabNavigator();
 const screenIcons = {
@@ -19,7 +19,6 @@ const TabNavigator = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          height: TABBAR_HEIGHT,
           backgroundColor: colorTheme.main,
         },
       }}>

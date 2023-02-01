@@ -1,30 +1,45 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
-import Animated, {ZoomIn, ZoomOut} from 'react-native-reanimated';
-import YaMap from 'react-native-yamap';
-import {applicationStore} from '../store/applicationStore';
-import {colorTheme} from '../theme/theme';
+import { observer } from 'mobx-react';
+import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { Alert, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import Animated, { ZoomIn, ZoomOut } from 'react-native-reanimated';
+import YaMap, { Marker } from 'react-native-yamap';
+import { applicationStore } from '../store/applicationStore';
+import { mapStore } from '../store/mapStore';
+import { colorTheme } from '../theme/theme';
+import { FeatureMember } from '../types/api/yandexMap.api';
 
 const minusIcon = require('./images/minus.png');
 const plusIcon = require('./images/plus.png');
 const geoIcon = require('./images/geo.png');
 const pointerIcon = require('./images/pointer.png');
+const markerIcon = require('./images/marker.png');
+
 
 type Props = {
-  style: {};
+  style?: {},
+  searchPoints: FeatureMember[];
+  currentRef: MutableRefObject<YaMap | null>,
+  onPressSearchPoint: (point: FeatureMember) => void;
 };
+
+type PropsObserved = {
+  style?: {},
+  onPressSearchPoint: (point: FeatureMember) => void;
+}
 
 const MAP_DURATION = 0.2;
 const ZOOM_STEP = 0.8;
 const DEFAULT_ZOOM = 18;
 
 type LocationIconStateType = 'compass' | 'pointer';
-const Map = ({style}: Props) => {
+
+const Map = ({ style, searchPoints, currentRef, onPressSearchPoint }: Props) => {
+
   const [locationIconState, setLocationIconState] =
     useState<LocationIconStateType>('compass');
   const [mapAximut, setMapAzimut] = useState(0);
   const mapRef = useRef<YaMap | null>(null);
-
+  currentRef.current = mapRef.current;
   useEffect(() => {
     mapRef.current?.getCameraPosition(options => {
       mapRef.current?.setCenter(
@@ -111,7 +126,18 @@ const Map = ({style}: Props) => {
         onCameraPositionChange={onMapRotationChange}
         ref={ref => (mapRef.current = ref)}
         style={styles.map}
-      />
+      >
+        {searchPoints.length > 0 && searchPoints.map((point) => (
+          <Marker
+            onPress={() => onPressSearchPoint(point)}
+            source={markerIcon}
+            key={point.GeoObject.boundedBy.Envelope.lowerCorner}
+            point={{
+              lon: +point.GeoObject.boundedBy.Envelope.lowerCorner.split(' ')[0],
+              lat: +point.GeoObject.boundedBy.Envelope.lowerCorner.split(' ')[1],
+            }} />
+        ))}
+      </YaMap>
       <View style={styles.content}>
         <TouchableOpacity style={styles.iconWrapper} onPress={onPressZoomIn}>
           <Image style={styles.icon} source={plusIcon} resizeMode="contain" />
@@ -157,6 +183,19 @@ const Map = ({style}: Props) => {
     </View>
   );
 };
+
+
+const MapObserver = (props: PropsObserved) => {
+  const mapRef = useRef<YaMap | null>(null)
+  const searchPoints = mapStore.geocode?.featureMember || []
+
+  useEffect(() => {
+    mapRef.current?.fitAllMarkers();
+  }, [mapStore.geocode])
+
+
+  return <Map {...props} searchPoints={searchPoints} currentRef={mapRef} />
+}
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -205,4 +244,6 @@ const styles = StyleSheet.create({
   },
 });
 
+
+export const MapObservered = observer(MapObserver)
 export default Map;

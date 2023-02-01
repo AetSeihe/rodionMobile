@@ -1,5 +1,6 @@
-import {DrivingInfo, Point} from 'react-native-yamap';
-import {Route} from '../models/route.model';
+import { DrivingInfo, Point } from 'react-native-yamap';
+import { Route } from '../models/route.model';
+import { FeatureMember } from './api/yandexMap.api';
 
 export type CordType = {
   lon: number;
@@ -11,3 +12,6 @@ export type RouteInMapType = {
   points: Point[];
   info: DrivingInfo;
 };
+
+export type GeolocationType = 'auto' | FeatureMember | null;
+

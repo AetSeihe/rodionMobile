@@ -1,6 +1,6 @@
-import {useNavigation} from '@react-navigation/core';
-import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+import React, { useState } from 'react';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import Animated, {
   FadeIn,
   FadeInUp,
@@ -8,10 +8,10 @@ import Animated, {
   FadeOutUp,
 } from 'react-native-reanimated';
 import Button from '../../components/Button';
-import {BASE_DURATION} from '../../constants/animation';
-import {LogoImage} from '../../images';
-import {colorTheme, mainFont} from '../../theme/theme';
-import {SCREEN_NAMES} from '../../types/screen-names.type';
+import { BASE_DURATION } from '../../constants/animation';
+import { LogoImage } from '../../images';
+import { colorTheme, mainFont } from '../../theme/theme';
+import { SCREEN_NAMES } from '../../types/screen-names.type';
 
 const finishImage = require('./images/finish.png');
 
@@ -26,35 +26,37 @@ const OnboardingFinishScreen = () => {
     }, BASE_DURATION * 1.5);
   };
   return (
-    <View style={styles.wrapper}>
-      {isVisibleScreen && (
-        <>
-          <Animated.Image
-            entering={FadeInUp}
-            exiting={FadeOutUp}
-            style={styles.logo}
-            source={LogoImage}
-            resizeMode="contain"
-          />
-          <Animated.Image
-            entering={FadeIn}
-            exiting={FadeOut}
-            style={styles.image}
-            source={finishImage}
-            resizeMode="contain"
-          />
-          <Animated.Text
-            entering={FadeIn}
-            exiting={FadeOut}
-            style={styles.title}>
-            Желаем удачи!
-          </Animated.Text>
-          <Animated.View entering={FadeInUp} exiting={FadeOutUp}>
-            <Button title="Перейти к маршрутам" onPress={goToNextScreen} />
-          </Animated.View>
-        </>
-      )}
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.wrapper}>
+        {isVisibleScreen && (
+          <>
+            <Animated.Image
+              entering={FadeInUp}
+              exiting={FadeOutUp}
+              style={styles.logo}
+              source={LogoImage}
+              resizeMode="contain"
+            />
+            <Animated.Image
+              entering={FadeIn}
+              exiting={FadeOut}
+              style={styles.image}
+              source={finishImage}
+              resizeMode="contain"
+            />
+            <Animated.Text
+              entering={FadeIn}
+              exiting={FadeOut}
+              style={styles.title}>
+              Желаем удачи!
+            </Animated.Text>
+            <Animated.View entering={FadeInUp} exiting={FadeOutUp}>
+              <Button title="Перейти к маршрутам" onPress={goToNextScreen} />
+            </Animated.View>
+          </>
+        )}
+      </View>
+    </SafeAreaView>
   );
 };
 

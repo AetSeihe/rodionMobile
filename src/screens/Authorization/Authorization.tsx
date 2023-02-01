@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, { useState } from 'react';
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, {
   FadeIn,
   FadeInRight,
@@ -15,23 +15,23 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {Formik} from 'formik';
-import {Asset, launchImageLibrary} from 'react-native-image-picker';
+import { Formik } from 'formik';
+import { Asset, launchImageLibrary } from 'react-native-image-picker';
 import * as yup from 'yup';
 
 import Button from '../../components/Button';
 import InputField from '../../components/InputField';
 import AddPhotoForm from '../../components/PhotoForm';
-import {lockIcon, LogoLightImage, messageIcon} from '../../images';
-import {colorTheme, mainFont} from '../../theme/theme';
-import {phoneMaskReg} from '../../constants/regexp';
-import {fieldLocale} from '../../locale';
-import {LoginRequestType} from '../../types/api/user-api.types';
-import {userStore} from '../../store/userStore';
-import {observer} from 'mobx-react';
-import {useNavigation} from '@react-navigation/core';
-import {SCREEN_NAMES} from '../../types/screen-names.type';
-import {applicationStore} from '../../store/applicationStore';
+import { lockIcon, LogoLightImage, messageIcon } from '../../images';
+import { colorTheme, mainFont } from '../../theme/theme';
+import { phoneMaskReg } from '../../constants/regexp';
+import { fieldLocale } from '../../locale';
+import { LoginRequestType } from '../../types/api/user-api.types';
+import { userStore } from '../../store/userStore';
+import { observer } from 'mobx-react';
+import { useNavigation } from '@react-navigation/core';
+import { SCREEN_NAMES } from '../../types/screen-names.type';
+import { applicationStore } from '../../store/applicationStore';
 
 const loginSchema = yup.object().shape({
   username: yup.string().required(fieldLocale.required),
@@ -167,7 +167,7 @@ const Authorization = () => {
           DURATION * 2,
         )}
         style={styles.content}>
-        <View style={styles.form}>
+        <KeyboardAvoidingView behavior={"position"} style={styles.form}>
           <Text style={styles.title}>{isSignIn ? 'Вход' : 'Регистрация'}</Text>
           {isSignIn && (
             <Animated.View entering={SlideInLeft} exiting={SlideOutRight}>
@@ -175,7 +175,7 @@ const Authorization = () => {
                 initialValues={initialLoginValues}
                 onSubmit={handleLogin}
                 validationSchema={loginSchema}>
-                {({values, handleChange, handleSubmit, errors}) => (
+                {({ values, handleChange, handleSubmit, errors }) => (
                   <>
                     <InputField
                       label="Логин"
@@ -216,7 +216,7 @@ const Authorization = () => {
                 initialValues={initialSignUpValues}
                 onSubmit={handleSignUp}
                 validationSchema={signUpSchema}>
-                {({handleSubmit, handleChange, values, errors}) => (
+                {({ handleSubmit, handleChange, values, errors }) => (
                   <>
                     <AddPhotoForm
                       onPress={handleAddPhoto}
@@ -285,9 +285,10 @@ const Authorization = () => {
               {isSignIn ? 'Cоздать аккаунт' : 'Войти'}
             </Text>
           </TouchableOpacity>
-        </View>
+        </KeyboardAvoidingView>
+
       </Animated.ScrollView>
-    </Animated.View>
+    </Animated.View >
   );
 };
 
