@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_URL = 'https://68d8-93-177-174-71.eu.ngrok.io';
+export const BASE_URL = 'https://20b4-93-177-174-71.eu.ngrok.io';
 
 const axiosConfig = {
   Authorization: '',

@@ -163,7 +163,7 @@ const SearchForm = ({
           </Animated.Text>
         )}
         <Animated.View style={hiddenComponentStyle}>
-          <Button title="Поиск" />
+          <Button title="Поиск" onPress={closeForm} />
         </Animated.View>
       </Animated.View>
       {points && (
